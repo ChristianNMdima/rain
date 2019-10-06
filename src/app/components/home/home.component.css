@@ -1,0 +1,4 @@
+.scrolable_div {
+    height: 50% !important;
+    overflow: scroll;
+  }

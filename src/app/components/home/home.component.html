@@ -1,0 +1,81 @@
+<block-ui>
+<div class="content">
+
+    <!-- I am forcing h2 to the center, overwriting css class -->
+    <div id="heading" style="text-align: center !important;">
+        <h2>Home</h2>
+        <p>Welcome to my Rain Assessment, click <a routerLink="/about">here</a> for info. Please enjoy!</p>
+    </div>
+    
+    <div class="row">
+        <div class="col-4">
+            <input class="form-control" type="text" placeholder="Search by userId" (keyup)="search($event.target.value)">
+        </div>
+        <div class="col-4">
+            <input type="button" class="btn btn-primary btn-block" value="Show all posts" (click)="ngOnInit()">
+        </div>
+        <div class="col-4 text-black-50">        
+            <input type="button" class="btn btn-success btn-block" value="Create Post"  data-toggle="modal" data-target="#newPost">
+        </div>
+    </div>
+
+    <hr>
+    
+    <table class="table-bordered table-striped"> 
+        <tr>      
+            <td>Post Id</td>
+            <td>User Id</td>
+            <td>Title</td>
+            <td>Body</td>
+        </tr>
+        <tbody>
+
+            <ng-container *ngFor="let post of posts; let i=index">
+                <tr *ngIf="i < 26">
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.userId }}</td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.body }}</td>
+                    <td class="text-muted">
+                        <i class="fa fa-edit" data-toggle="modal" (click)="update(post.id, post.title, post.body)"></i><br>
+                        <i class="fa fa-trash" (click)="delete(post.id)"></i>
+                    </td>
+                </tr> 
+            </ng-container>
+
+        </tbody>
+        
+    </table>
+
+</div>
+
+ <!-- Create New Post Modal -->
+<div class="modal fade" id="newPost">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+        
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">New {{ title }} Post </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form #postForm = "ngForm" (ngSubmit) = "create(postForm.value)">
+                    <div class="form-group">
+                        <label for="ttl">Title:</label>
+                        <input type="text" class="form-control" id="ttl"  name="title" ngModel required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bdy">Body:</label>
+                        <textarea class="form-control" name="body" ngModel required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" >Submit Post</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</block-ui>

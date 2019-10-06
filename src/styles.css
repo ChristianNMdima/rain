@@ -1,0 +1,6 @@
+/* My global styles would go in here
+ * The 'my-name' class is used on 'Christian' on the app.component.html.
+ */
+.my-name {
+    margin-right: 36px !important
+}
